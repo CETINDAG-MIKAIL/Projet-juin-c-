@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BackgroundMainWindow.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Person\EntitiesLibrary.csproj" />
+    <ProjectReference Include="..\WpfAppCoachForm\WpfAppCoachForm.csproj" />
+    <ProjectReference Include="..\WpfAppPlayerForm\WpfAppPlayerForm.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BackgroundMainWindow.jpeg" />
+  </ItemGroup>
+
+</Project>
