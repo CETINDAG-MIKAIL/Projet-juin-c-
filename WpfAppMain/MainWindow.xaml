@@ -34,7 +34,8 @@
         </DataGrid>
         <Button Content="New Player" HorizontalAlignment="Left" Margin="22,380,0,0" VerticalAlignment="Top" Width="100" Click="Button_NewPlayer" />
         <Button Content="Delete Player" HorizontalAlignment="Left" Margin="127,380,0,0" VerticalAlignment="Top" Width="100" Click="Button_DeletePlayer"/>
-
+        <Button Content="Export Player" HorizontalAlignment="Left" Margin="127,410,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ExportPlayer" />
+        <Button Content="Import Player" HorizontalAlignment="Left" Margin="22,410,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ImportPlayer" />
         <!-- Coach Section -->
         <Label Content="Coachs :" HorizontalAlignment="Left" Margin="425,74,0,0" VerticalAlignment="Top" Foreground="White"/>
         <DataGrid x:Name="DataGridCoachs" ItemsSource="{Binding Coachs}" Margin="425,105,10,69" AutoGenerateColumns="False" BorderBrush="{x:Null}" Background="{x:Null}">
@@ -53,6 +54,9 @@
         </DataGrid>
         <Button Content="New Coach" HorizontalAlignment="Left" Margin="425,380,0,0" VerticalAlignment="Top" Width="100" Click="Button_NewCoach" />
         <Button Content="Delete Coach" HorizontalAlignment="Left" Margin="530,380,0,0" VerticalAlignment="Top" Width="100" Click="Button_DeleteCoach"/>
+        <Button Content="Export Coach" HorizontalAlignment="Left" Margin="530,410,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ExportCoach" />
+        <Button Content="Import Coach" HorizontalAlignment="Left" Margin="425,410,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ImportCoach" />
+
         <Label Content="Football Club" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="White"/>
     </Grid>
 </Window>

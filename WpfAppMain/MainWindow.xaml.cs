@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.IO;
 using WpfAppCoachForm;
 using WpfAppPlayerForm;
+using System.Xml.Serialization;
 
 namespace WpfAppMain
 {
@@ -115,6 +116,118 @@ namespace WpfAppMain
             // Écrire les données JSON dans le fichier
             File.WriteAllText(filePath, jsonData);
         }
-        
+
+        private void ExportPlayerToXml(Player player, string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Player));
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, player);
+            }
+        }
+
+        private Player ImportPlayerFromXml(string filePath)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Player));
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    return (Player)serializer.Deserialize(reader);
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Le fichier XML ne correspond pas au format attendu pour un joueur.", "Erreur de désérialisation", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Renvoyer une valeur par défaut, car s'il renvoie null il casse tout !!!!!
+                return new Player();
+            }
+        }
+        private void ExportCoachToXml(Coach coach, string filePath)
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(Coach));
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                serializer.Serialize(writer, coach);
+            }
+        }
+
+        private Coach ImportCoachFromXml(string filePath)
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(Coach));
+                using (StreamReader reader = new StreamReader(filePath))
+                {
+                    return (Coach)serializer.Deserialize(reader);
+                }
+            }
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show("Le fichier XML ne correspond pas au format attendu pour un coach.", "Erreur de désérialisation", MessageBoxButton.OK, MessageBoxImage.Error);
+                // Renvoyer une valeur par défaut, car s'il renvoie null il casse tout !!!!!
+                return new Coach();
+            }
+        }
+        private void Button_ImportPlayer(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "XML Files (*.xml)|*.xml"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Player importedPlayer = ImportPlayerFromXml(openFileDialog.FileName);
+                Players.Add(importedPlayer);
+                SaveTeamToJson(); // Sauvegarder après import
+            }
+        }
+
+        private void Button_ExportPlayer(object sender, RoutedEventArgs e)
+        {
+            if (DataGridPlayers.SelectedItem != null && DataGridPlayers.SelectedItem is Player selectedPlayer)
+            {
+                // Choisir le fichier de destination
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    Filter = "XML Files (*.xml)|*.xml"
+                };
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    ExportPlayerToXml(selectedPlayer, saveFileDialog.FileName);
+                }
+            }
+        }
+
+        private void Button_ExportCoach(object sender, RoutedEventArgs e)
+        {
+            if (DataGridCoachs.SelectedItem != null && DataGridCoachs.SelectedItem is Coach selectedCoach)
+            {
+                // Choisir le fichier de destination
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    Filter = "XML Files (*.xml)|*.xml"
+                };
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    ExportCoachToXml(selectedCoach, saveFileDialog.FileName);
+                }
+            }
+        }
+
+
+        private void Button_ImportCoach(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "XML Files (*.xml)|*.xml"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Coach importedCoach = ImportCoachFromXml(openFileDialog.FileName);
+                Coachs.Add(importedCoach);
+                SaveTeamToJson(); // Sauvegarder après import
+            }
+        }
     }
 }
