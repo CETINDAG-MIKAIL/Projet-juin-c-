@@ -61,6 +61,39 @@ namespace WpfAppMain
             Team.SaveToJson(filePath);
         }
 
+        private void CreateTeamJsonFile(string filePath)
+        {
+            // Créer un objet Team vide
+            Team team = new Team();
+
+            // Convertir l'objet Team en format JSON
+            string jsonData = JsonConvert.SerializeObject(team);
+
+            // Écrire les données JSON dans le fichier
+            File.WriteAllText(filePath, jsonData);
+        }
+
+        private void ExportTeamToJson(string filePath)
+        {
+            SaveTeamToJson();
+            Team.SaveToJson(filePath);
+        }
+
+        private void ImportTeamFromJson(string filePath)
+        {
+            Team = Team.LoadFromJson(filePath);
+            Players.Clear();
+            Coachs.Clear();
+            foreach (var player in Team.Players)
+            {
+                Players.Add(player);
+            }
+            foreach (var coach in Team.Coachs)
+            {
+                Coachs.Add(coach);
+            }
+        }
+
         private void Button_NewPlayer(object sender, RoutedEventArgs e)
         {
             CreatePlayerForm createPlayerForm = new CreatePlayerForm();
@@ -105,18 +138,6 @@ namespace WpfAppMain
             }
         }
 
-        private void CreateTeamJsonFile(string filePath)
-        {
-            // Créer un objet Team vide
-            Team team = new Team();
-
-            // Convertir l'objet Team en format JSON
-            string jsonData = JsonConvert.SerializeObject(team);
-
-            // Écrire les données JSON dans le fichier
-            File.WriteAllText(filePath, jsonData);
-        }
-
         private void ExportPlayerToXml(Player player, string filePath)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Player));
@@ -139,10 +160,10 @@ namespace WpfAppMain
             catch (InvalidOperationException ex)
             {
                 MessageBox.Show("Le fichier XML ne correspond pas au format attendu pour un joueur.", "Erreur de désérialisation", MessageBoxButton.OK, MessageBoxImage.Error);
-                // Renvoyer une valeur par défaut, car s'il renvoie null il casse tout !!!!!
                 return new Player();
             }
         }
+
         private void ExportCoachToXml(Coach coach, string filePath)
         {
             XmlSerializer serializer = new XmlSerializer(typeof(Coach));
@@ -165,10 +186,10 @@ namespace WpfAppMain
             catch (InvalidOperationException ex)
             {
                 MessageBox.Show("Le fichier XML ne correspond pas au format attendu pour un coach.", "Erreur de désérialisation", MessageBoxButton.OK, MessageBoxImage.Error);
-                // Renvoyer une valeur par défaut, car s'il renvoie null il casse tout !!!!!
                 return new Coach();
             }
         }
+
         private void Button_ImportPlayer(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
@@ -215,7 +236,6 @@ namespace WpfAppMain
             }
         }
 
-
         private void Button_ImportCoach(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
@@ -227,6 +247,31 @@ namespace WpfAppMain
                 Coach importedCoach = ImportCoachFromXml(openFileDialog.FileName);
                 Coachs.Add(importedCoach);
                 SaveTeamToJson(); // Sauvegarder après import
+            }
+        }
+
+        private void ImporterEquipe_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog openFileDialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Filter = "JSON Files (*.json)|*.json"
+            };
+            if (openFileDialog.ShowDialog() == true)
+            {
+                ImportTeamFromJson(openFileDialog.FileName);
+                SaveTeamToJson(); // Sauvegarder après import
+            }
+        }
+
+        private void ExporterEquipe_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Filter = "JSON Files (*.json)|*.json"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                ExportTeamToJson(saveFileDialog.FileName);
             }
         }
     }
