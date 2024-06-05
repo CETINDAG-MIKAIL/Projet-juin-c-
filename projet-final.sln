@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntitiesLibrary", "Person\E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppMain", "WpfAppMain\WpfAppMain.csproj", "{9B5C66D5-194C-4B60-8176-39DA89CEC201}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppPlayerForm", "WpfAppPlayerForm\WpfAppPlayerForm.csproj", "{EABB9A33-F32A-4CED-8325-AF9187B540D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppPlayerForm", "WpfAppPlayerForm\WpfAppPlayerForm.csproj", "{EABB9A33-F32A-4CED-8325-AF9187B540D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppCoachForm", "WpfAppCoachForm\WpfAppCoachForm.csproj", "{A06A46B7-902B-4FC8-88EE-B3E40C104825}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppCoachForm", "WpfAppCoachForm\WpfAppCoachForm.csproj", "{A06A46B7-902B-4FC8-88EE-B3E40C104825}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppParam", "WpfAppParam\WpfAppParam.csproj", "{36788F71-F350-4C15-B658-864A641CCADE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{A06A46B7-902B-4FC8-88EE-B3E40C104825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A06A46B7-902B-4FC8-88EE-B3E40C104825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A06A46B7-902B-4FC8-88EE-B3E40C104825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36788F71-F350-4C15-B658-864A641CCADE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36788F71-F350-4C15-B658-864A641CCADE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36788F71-F350-4C15-B658-864A641CCADE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36788F71-F350-4C15-B658-864A641CCADE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

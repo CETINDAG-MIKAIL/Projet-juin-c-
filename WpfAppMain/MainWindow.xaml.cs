@@ -6,6 +6,10 @@ using System.IO;
 using WpfAppCoachForm;
 using WpfAppPlayerForm;
 using System.Xml.Serialization;
+using System.Windows.Media.Imaging;
+using System.Windows.Media;
+using WpfAppParam;
+
 
 namespace WpfAppMain
 {
@@ -14,12 +18,13 @@ namespace WpfAppMain
         public ObservableCollection<Player> Players { get; set; }
         public ObservableCollection<Coach> Coachs { get; set; }
         public Team Team { get; set; }
-
+        private MyAppParam appParams = new MyAppParam();
         public MainWindow()
         {
             InitializeComponent();
             string filePath = "team.json";
-
+            appParams.LoadRegistryParameters();
+          
             if (!File.Exists(filePath))
             {
                 CreateTeamJsonFile(filePath);
@@ -274,5 +279,23 @@ namespace WpfAppMain
                 ExportTeamToJson(saveFileDialog.FileName);
             }
         }
+        private void parametre_Click(object sender, RoutedEventArgs e)
+        {
+            ParametresWindow parametresWindow = new ParametresWindow(appParams);
+            
+            parametresWindow.ShowDialog();
+
+            
+                // Récupérer la taille souhaitée de la fenêtre principale depuis la fenêtre de paramètres
+                Size desiredSize = parametresWindow.DesiredMainWindowSize;
+
+                // Utiliser la taille souhaitée pour changer la taille de la fenêtre principale
+                if (desiredSize != null)
+                {
+                this.Width = appParams.MainWindowWidth;
+                this.Height = appParams.MainWindowHeight;
+            } 
+        }
+
     }
 }

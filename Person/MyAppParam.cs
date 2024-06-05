@@ -14,7 +14,8 @@ namespace EntitiesLibrary
 
         // Propriétés pour les paramètres de l'application
         public string FilePath { get; set; }
-        // Ajoutez d'autres propriétés selon les besoins
+        public double MainWindowWidth { get; set; }
+        public double MainWindowHeight { get; set; }
 
         // Méthode pour charger les paramètres depuis la registry
         public void LoadRegistryParameters()
@@ -24,7 +25,8 @@ namespace EntitiesLibrary
                 if (key != null)
                 {
                     FilePath = key.GetValue("FilePath") as string;
-                    // Chargez d'autres paramètres de la même manière
+                    MainWindowWidth = Convert.ToDouble(key.GetValue("MainWindowWidth", 800));
+                    MainWindowHeight = Convert.ToDouble(key.GetValue("MainWindowHeight", 600));
                 }
             }
         }
@@ -37,9 +39,11 @@ namespace EntitiesLibrary
                 if (key != null)
                 {
                     key.SetValue("FilePath", FilePath);
-                    // Enregistrez d'autres paramètres de la même manière
+                    key.SetValue("MainWindowWidth", MainWindowWidth);
+                    key.SetValue("MainWindowHeight", MainWindowHeight);
                 }
             }
         }
     }
 }
+

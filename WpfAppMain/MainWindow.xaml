@@ -19,11 +19,10 @@
                 <MenuItem Header="Importer Equipe" Click="ImporterEquipe_Click" />
                 <MenuItem Header="Exporter Equipe" Click="ExporterEquipe_Click"/>
             </MenuItem>
-        
-            <MenuItem Header="Pararametre">
-                <MenuItem Header="Importer Equipe" />
-                <MenuItem Header="Exporter Equipe" />
-                </MenuItem>
+
+            <MenuItem Header="Parametre" Click="parametre_Click">
+                
+            </MenuItem>
         </Menu>
 
         <Grid x:Name="CurrentGrid">
