@@ -5,74 +5,93 @@
         Title="MainWindow" Height="500" Width="800"
         MinWidth="600"
         MinHeight="400">
+
     <Window.Resources>
         <local:ImagePathToImage x:Key="ImagePathToImage"/>
     </Window.Resources>
-
-    <Grid x:Name="CurrentGrid">
+    <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/BackgroundMainWindow.jpeg" TileMode="None" Stretch="UniformToFill"/>
         </Grid.Background>
+        
+        <Menu VerticalAlignment="Top" HorizontalAlignment="Left">
+            <MenuItem Header="File Equipe">
+                <MenuItem Header="Importer Equipe" Click="ImporterEquipe_Click" />
+                <MenuItem Header="Exporter Equipe" Click="ExporterEquipe_Click"/>
+            </MenuItem>
+        
+            <MenuItem Header="Pararametre">
+                <MenuItem Header="Importer Equipe" />
+                <MenuItem Header="Exporter Equipe" />
+                </MenuItem>
+        </Menu>
 
-        <!-- Define Rows and Columns with fixed sizes -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/> <!-- For the Labels -->
-            <RowDefinition Height="*"/>    <!-- For the DataGrids -->
-            <RowDefinition Height="Auto"/> <!-- For the Buttons -->
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <Grid x:Name="CurrentGrid">
 
-        <!-- Player Section -->
-        <Label Content="Players :" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <DataGrid x:Name="DataGridPlayers" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Players}" Margin="10,0,10,0" AutoGenerateColumns="False" BorderBrush="{x:Null}" Background="{x:Null}" 
+
+            <!-- Define Rows and Columns with fixed sizes -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <!-- For the Labels -->
+                <RowDefinition Height="*"/>
+                <!-- For the DataGrids -->
+                <RowDefinition Height="Auto"/>
+                <!-- For the Buttons -->
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Player Section -->
+            <Label Content="Players :" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <DataGrid x:Name="DataGridPlayers" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Players}" Margin="10,0,10,0" AutoGenerateColumns="False" BorderBrush="{x:Null}" Background="{x:Null}" 
                   MaxWidth="360" MaxHeight="200">
-            <DataGrid.Columns>
-                <!--image-->
-                <DataGridTemplateColumn Header="Photo">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding PhotoPath, Converter={StaticResource ImagePathToImage}}" Width="50" Height="50" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                <DataGrid.Columns>
+                    <!--image-->
+                    <DataGridTemplateColumn Header="Photo">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding PhotoPath, Converter={StaticResource ImagePathToImage}}" Width="50" Height="50" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
-                <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="LastName" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
-                <DataGridTextColumn Header="Position" Binding="{Binding Position}"/>
-                <DataGridTextColumn Header="NumberJersey" Binding="{Binding NumberJersey}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="New Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_NewPlayer" />
-        <Button Content="Delete Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_DeletePlayer"/>
-        <Button Content="Export Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="127,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ExportPlayer" />
-        <Button Content="Import Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="22,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ImportPlayer" />
+                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="LastName" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Age" Binding="{Binding Age}"/>
+                    <DataGridTextColumn Header="Position" Binding="{Binding Position}"/>
+                    <DataGridTextColumn Header="NumberJersey" Binding="{Binding NumberJersey}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="New Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="22,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_NewPlayer" />
+            <Button Content="Delete Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="127,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_DeletePlayer"/>
+            <Button Content="Export Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="127,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ExportPlayer" />
+            <Button Content="Import Player" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="22,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ImportPlayer" />
 
-        <!-- Coach Section -->
-        <Label Content="Coachs :" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <DataGrid x:Name="DataGridCoachs" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Coachs}" Margin="10,0,10,0" AutoGenerateColumns="False" BorderBrush="{x:Null}" Background="{x:Null}" 
+            <!-- Coach Section -->
+            <Label Content="Coachs :" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="50,30,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <DataGrid x:Name="DataGridCoachs" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Coachs}" Margin="10,0,10,0" AutoGenerateColumns="False" BorderBrush="{x:Null}" Background="{x:Null}" 
                   MaxWidth="350" MaxHeight="200">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Photo">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding PhotoPath, Converter={StaticResource ImagePathToImage}}" Width="50" Height="50" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}"/>
-                <DataGridTextColumn Header="LastName" Binding="{Binding LastName}"/>
-                <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Content="New Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_NewCoach" />
-        <Button Content="Delete Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_DeleteCoach"/>
-        <Button Content="Export Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="115,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ExportCoach" />
-        <Button Content="Import Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ImportCoach" />
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Photo">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding PhotoPath, Converter={StaticResource ImagePathToImage}}" Width="50" Height="50" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="FirstName" Binding="{Binding FirstName}"/>
+                    <DataGridTextColumn Header="LastName" Binding="{Binding LastName}"/>
+                    <DataGridTextColumn Header="Role" Binding="{Binding Role}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="New Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_NewCoach" />
+            <Button Content="Delete Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="100" Click="Button_DeleteCoach"/>
+            <Button Content="Export Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="115,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ExportCoach" />
+            <Button Content="Import Coach" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top" Width="100"  Click="Button_ImportCoach" />
 
-        <Label Content="Football Club" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+            <Label Content="Football Club" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" Foreground="White"/>
+        </Grid>
     </Grid>
 </Window>
